@@ -5,12 +5,11 @@ import java.util.Stack;
 public class Processor extends Thread {
     private int threadNumber;
     private Graph graph;
-    public Processor(Graph g,int id){
+    public Processor(Graph g,int id) {
         this.threadNumber = id;
         setName("Processor "+id);
         graph = g;
     }
-
 
     @Override
     public long getId() {
@@ -25,9 +24,11 @@ public class Processor extends Thread {
             subDfs(graph.getLocalStacks().get(threadNumber));
         }
     }
+
     public int getThreadNumber() {
         return threadNumber;
     }
+
     public void setThreadNumber(int threadNumber) {
         this.threadNumber = threadNumber;
     }

@@ -10,7 +10,7 @@ public class Main {
         final int numberOfCore = 4;
 
         boolean[] visited = new boolean[numberOfNodes];
-        for(int i = 0; i<numberOfNodes; i++){
+        for(int i = 0; i<numberOfNodes; i++) {
             visited[i] = false;
         }
         Graph graph = new Graph(numberOfNodes,visited,numberOfCore);
@@ -19,7 +19,7 @@ public class Main {
          * */
         start = Calendar.getInstance().getTimeInMillis();
         Thread[] processors = new Processor[numberOfCore];
-        for(int i = 0; i<numberOfCore; i++){
+        for(int i = 0; i<numberOfCore; i++) {
             processors[i] = new Processor(graph,i);
             processors[i].start();
         }

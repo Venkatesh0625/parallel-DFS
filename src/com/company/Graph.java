@@ -33,13 +33,13 @@ public class Graph {
         globalStack.push(size-1);
         counter = 0;
         for(int i = 0; i<this.size; i++)
-            for(int j = 0; j<this.size; j++){
+            for(int j = 0; j<this.size; j++) {
                 Random boolNumber = new Random();
                 boolean edge = boolNumber.nextBoolean();
                 if(i==j)
-                    vertices[i][j]=1;
+                    vertices[i][j] = 1;
                 else
-                    vertices[i][j]=edge ? 1 : 0;
+                    vertices[i][j] = edge ? 1 : 0;
             }
     }
     public int getSize(){
@@ -80,12 +80,14 @@ public class Graph {
                 e.printStackTrace();
             }
         }
+
         int index = (int)(Thread.currentThread().getId());
+
         if(!globalStack.isEmpty()){
             boolean popped = false;
             int node = globalStack.pop();
             popped = true;
-            while(visited[node]){
+            while(visited[node]) {
                 if(globalStack.empty()){
                     isDone = true;
                     popped = false;
