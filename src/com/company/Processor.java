@@ -3,8 +3,8 @@ package com.company;
 import java.util.Stack;
 
 public class Processor extends Thread {
-    private int threadNumber;
-    private Graph graph;
+    private final int threadNumber;
+    private final Graph graph;
     public Processor(Graph g,int id) {
         this.threadNumber = id;
         setName("Processor "+id);
@@ -20,21 +20,13 @@ public class Processor extends Thread {
     public void run() {
         while(!graph.isDone()){
             graph.dfs();
-            yield();
+            Thread.yield();
             subDfs(graph.getLocalStacks().get(threadNumber));
         }
     }
 
-    public int getThreadNumber() {
-        return threadNumber;
-    }
-
-    public void setThreadNumber(int threadNumber) {
-        this.threadNumber = threadNumber;
-    }
-
-    public void subDfs(Stack<Integer> localStack){
-        Stack<Integer> tmpStack = new Stack<Integer>();
+    public void subDfs(Stack<Integer> localStack) {
+        Stack<Integer> tmpStack = new Stack<>();
         while(!localStack.isEmpty()){
             int node = localStack.pop();
             if(!graph.getVisited(node)){
@@ -43,9 +35,8 @@ public class Processor extends Thread {
                 boolean toLocal = true;
                 for(int i = 0; i<graph.getSize(); i++){
                     if(node==i)continue;
-                    if(graph.isNeighbour(node, i) && !toLocal && !graph.getVisited(i)){
+                    if(graph.isNeighbour(node, i) && !toLocal && !graph.getVisited(i)) {
                         tmpStack.push(i);
-
                     }
                     if(graph.isNeighbour(node, i) && toLocal && !graph.getVisited(i)){
                         localStack.push(i);

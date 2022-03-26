@@ -84,35 +84,36 @@ public class Graph {
         int index = (int)(Thread.currentThread().getId());
 
         if(!globalStack.isEmpty()){
-            boolean popped = false;
+            boolean popped = true;
             int node = globalStack.pop();
-            popped = true;
+
             while(visited[node]) {
                 if(globalStack.empty()){
                     isDone = true;
                     popped = false;
                     break;
-                }else{
+                } else {
                     node = globalStack.pop();
                     popped = true;
                 }
             }
-            if(popped){
+            if(popped) {
                 visited[node] = true;
                 counter++;
                 boolean flag = false;
                 for(int i = 0;i<size;i++){
-                    if(node==i)continue;
-                    if(isNeighbour(node, i) && !visited[i] && !flag){
+                    if(node==i) continue;
+                    if(isNeighbour(node, i) && !visited[i] && !flag) {
                         localStacks.get(index).push(i);
                         flag = true;
                     }
-                    if(isNeighbour(node, i) && !visited[i] && flag){
+                    if(isNeighbour(node, i) && !visited[i] && flag) {
                         globalStack.push(i);
                     }
                 }
             }
         }
+
         if(globalStack.empty())
             isDone = true;
         if(isDone && counter<size){
